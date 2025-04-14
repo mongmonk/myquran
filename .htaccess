@@ -1,0 +1,13 @@
+RewriteEngine On
+#RewriteCond %{HTTP:X-Forwarded-Proto} !https
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+Options -Indexes
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+SetEnvIfNoCase ^User-Agent$ .*(SemrushBot|semrush|curl|MJ12bot|DotBot|SEOkicks|serpstatbot|MegaIndex.ru|adscanner|JobboerseBot|AhrefsBot|CCBot|netEstate|Bytespider|Seekport|magpie-crawler|VelenPublicWebCrawler|Vagabondo|MojeekBot|svetabot|YandexImages|Knowledge|coccocbot-image|coccocbot|file_get_content|Dom) HTTP_SAFE_BADBOT
+
+Deny from env=HTTP_SAFE_BADBOT
